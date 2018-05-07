@@ -8,16 +8,13 @@ import (
 type User struct {
 	Base
 	gorm.Model
-	Name  string
-	Email string `gorm:"type:varchar(100);unique_index"`
-	Role  string `gorm:"size:255"`
+	Name  string `gorm:"type:varchar(45)"`
+	Email string `gorm:"type:varchar(45);unique_index"`
 }
 
-func NewUser(name, email, role string) (*User, error) {
+func NewUser(name, email string) (*User, error) {
 	db := config.Database
-	user := &User{Name: name, Email: email, Role: role}
-	if db.NewRecord(*user) {
-		db.Create(user)
-	}
+	user := &User{Name: name, Email: email}
+	db.Create(user)
 	return user, nil
 }

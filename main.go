@@ -11,5 +11,5 @@ func release() {
 
 func main() {
 	defer release()
-	model.NewUser("Lawrence", "lawrence.lee@foxmail.com", "ADMIN")
+	model.NewUser("Lawrence", "lawrence.lee@foxmail.com")
 }
