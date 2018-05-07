@@ -6,5 +6,5 @@ import (
 
 func init() {
 	db := config.Database
-	db.AutoMigrate(&User{})
+	db.AutoMigrate(&User{}, &AuthInfo{})
 }

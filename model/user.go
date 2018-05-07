@@ -15,6 +15,26 @@ type User struct {
 func NewUser(name, email string) (*User, error) {
 	db := config.Database
 	user := &User{Name: name, Email: email}
-	db.Create(user)
+	err := db.Create(user).Error
+	if err != nil {
+		return nil, err
+	}
 	return user, nil
+}
+
+func (user *User) GetByEmail(email string) (*User, error) {
+	db := config.Database
+	if err := db.Where("email = ?", email).Find(user).Error; err != nil {
+		return nil, err
+	}
+	return user, nil
+}
+
+func (user *User) Delete(permanently bool) {
+	db := config.Database
+	if permanently {
+		db.Delete(user)
+	} else {
+		db.Unscoped().Delete(user)
+	}
 }
