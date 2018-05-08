@@ -11,14 +11,14 @@ type AuthInfo struct {
 	Base
 	gorm.Model
 	UserID   uint   `gorm:"unique_key"`
-	Salt     string `gorm:"type:varchar(10)"`
+	Secret   string `gorm:"type:varchar(10)"`
 	Password string `gorm:"type:varchar(45)"`
 }
 
 func NewAuthInfo(userID uint, password string) (*AuthInfo, error) {
 	db := config.Database
-	salt := helper.GetRandomString(10)
-	authInfo := &AuthInfo{UserID: userID, Salt: salt, Password: helper.HashString(password)}
+	secret := helper.GetRandomString(10)
+	authInfo := &AuthInfo{UserID: userID, Secret: secret, Password: helper.HashString(password)}
 	err := db.Create(authInfo).Error
 	if err != nil {
 		return nil, err

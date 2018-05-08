@@ -16,4 +16,6 @@ func main() {
 	user.RegisterUser("Lawrence", "lawrence.lee@foxmail.com", "123456")
 	_, token := user.Login("lawrence.lee@foxmail.com", "123456")
 	fmt.Println(token)
+	fmt.Println(user.VerifyTokenString(token))
+
 }
