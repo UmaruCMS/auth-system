@@ -1,7 +1,6 @@
 package user
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/UmaruCMS/auth-system/model"
@@ -13,31 +12,36 @@ type CustomClaims struct {
 	ID uint `json:"id"`
 }
 
-const oneWeekTimeDuration int64 = 60 * 60 * 24 * 7
+const oneWeekSecDuration int64 = 60 * 60 * 24 * 7
 
 func CreateTokenString(authInfo *model.AuthInfo) (string, error) {
 	claims := CustomClaims{
 		ID: authInfo.UserID,
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: time.Now().Unix() + oneWeekTimeDuration,
+			ExpiresAt: time.Now().Unix() + oneWeekSecDuration,
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return token.SignedString([]byte(authInfo.Secret))
+	tokenString, err := token.SignedString([]byte(authInfo.Secret))
+	if err != nil {
+		return "", err
+	}
+	_, err = model.NewTokenInfo(authInfo, tokenString)
+	if err != nil {
+		return "", err
+	}
+
+	return tokenString, nil
 }
 
 func ParseTokenString(tokenString string) (*jwt.Token, error) {
 	return jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
-		// TODO: 将 token secret 的获取过程从 MySQL 转移到 Redis
-		if claims, ok := token.Claims.(*CustomClaims); ok {
-			authInfo := &model.AuthInfo{}
-			authInfo, err := authInfo.GetByUserID(claims.ID)
-			if err != nil {
-				return nil, err
-			}
-			return []byte(authInfo.Secret), nil
+		tokenInfo := &model.TokenInfo{}
+		tokenInfo, err := tokenInfo.GetFromRedis(tokenString)
+		if err != nil {
+			return nil, err
 		}
-		return nil, fmt.Errorf("parse error")
+		return []byte(tokenInfo.Secret), nil
 	})
 }
 

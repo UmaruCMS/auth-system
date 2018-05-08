@@ -4,9 +4,44 @@
 	"GodepVersion": "v80",
 	"Deps": [
 		{
-			"ImportPath": "github.com/dgrijalva/jwt-go",
-			"Comment": "v3.2.0",
-			"Rev": "06ea1031745cb8b3dab3f6a236daf2b0aa468b7e"
+			"ImportPath": "github.com/go-redis/redis",
+			"Comment": "v6.10.2-2-g9ccc233",
+			"Rev": "9ccc23344a52164531ed90362e2516b798e3296c"
+		},
+		{
+			"ImportPath": "github.com/go-redis/redis/internal",
+			"Comment": "v6.10.2-2-g9ccc233",
+			"Rev": "9ccc23344a52164531ed90362e2516b798e3296c"
+		},
+		{
+			"ImportPath": "github.com/go-redis/redis/internal/consistenthash",
+			"Comment": "v6.10.2-2-g9ccc233",
+			"Rev": "9ccc23344a52164531ed90362e2516b798e3296c"
+		},
+		{
+			"ImportPath": "github.com/go-redis/redis/internal/hashtag",
+			"Comment": "v6.10.2-2-g9ccc233",
+			"Rev": "9ccc23344a52164531ed90362e2516b798e3296c"
+		},
+		{
+			"ImportPath": "github.com/go-redis/redis/internal/pool",
+			"Comment": "v6.10.2-2-g9ccc233",
+			"Rev": "9ccc23344a52164531ed90362e2516b798e3296c"
+		},
+		{
+			"ImportPath": "github.com/go-redis/redis/internal/proto",
+			"Comment": "v6.10.2-2-g9ccc233",
+			"Rev": "9ccc23344a52164531ed90362e2516b798e3296c"
+		},
+		{
+			"ImportPath": "github.com/go-redis/redis/internal/singleflight",
+			"Comment": "v6.10.2-2-g9ccc233",
+			"Rev": "9ccc23344a52164531ed90362e2516b798e3296c"
+		},
+		{
+			"ImportPath": "github.com/go-redis/redis/internal/util",
+			"Comment": "v6.10.2-2-g9ccc233",
+			"Rev": "9ccc23344a52164531ed90362e2516b798e3296c"
 		},
 		{
 			"ImportPath": "github.com/go-sql-driver/mysql",

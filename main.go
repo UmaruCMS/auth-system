@@ -1,10 +1,7 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/UmaruCMS/auth-system/config"
-	"github.com/UmaruCMS/auth-system/controller/user"
 )
 
 func release() {
@@ -13,9 +10,16 @@ func release() {
 
 func main() {
 	defer release()
-	user.RegisterUser("Lawrence", "lawrence.lee@foxmail.com", "123456")
-	_, token := user.Login("lawrence.lee@foxmail.com", "123456")
-	fmt.Println(token)
-	fmt.Println(user.VerifyTokenString(token))
-
+	// user.RegisterUser("Lawrence", "lawrence.lee@foxmail.com", "123456")
+	// _, tokenString := user.Login("lawrence.lee@foxmail.com", "123456")
+	// fmt.Println(tokenString)
+	// tokenInfo, err := json.Marshal(model.TokenInfo{})
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// err = config.RedisClient.Set(tokenString, tokenInfo, oneWeekTimeDuration).Err()
+	// fmt.Println(err)
+	// fmt.Println(config.RedisClient.Get(tokenString).Result())
+	// fmt.Println(user.VerifyTokenString(token))
+	// fmt.Println(config.RedisClient.Ping().Result())
 }

@@ -1,8 +1,6 @@
 package user
 
 import (
-	"log"
-
 	"github.com/UmaruCMS/auth-system/helper"
 	"github.com/UmaruCMS/auth-system/model"
 )
@@ -35,14 +33,14 @@ func Login(email, password string) (bool, string) {
 		return false, ""
 	}
 
-	if authInfo.Password == helper.HashString(password) {
-		token, err := CreateTokenString(authInfo)
-		if err != nil {
-			log.Fatal(err)
-			return false, ""
-		}
-		return true, token
+	if authInfo.Password != helper.HashString(password) {
+		return false, ""
 	}
 
-	return false, ""
+	tokenString, err := CreateTokenString(authInfo)
+	if err != nil {
+		return false, ""
+	}
+
+	return true, tokenString
 }

@@ -1,3 +1,6 @@
  {
-     "mysql_addr": " user:password@/dbname?charset=utf8&parseTime=True&loc=Local"
+     "mysql_addr": " user:password@/dbname?charset=utf8&parseTime=True&loc=Local",
+     "redis_addr": "localhost:6379",
+     "redis_password": "",
+     "redis_db_num": 0
  }
