@@ -30,11 +30,10 @@ func (user *User) GetByEmail(email string) (*User, error) {
 	return user, nil
 }
 
-func (user *User) Delete(permanently bool) {
+func (user *User) Delete(permanently bool) error {
 	db := config.Database
 	if permanently {
-		db.Delete(user)
-	} else {
-		db.Unscoped().Delete(user)
+		return db.Delete(user).Error
 	}
+	return db.Unscoped().Delete(user).Error
 }
