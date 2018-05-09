@@ -1,5 +1,9 @@
 # Umaru CMS - Auth System
 
+## Notice
+
+依赖发生变化时要执行 `dep ensure`
+
 ## TODO List
 
 ### 架构
