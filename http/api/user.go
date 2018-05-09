@@ -8,8 +8,25 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type registerForm struct {
+	Name     string `form:"name" binding:"required"`
+	Email    string `form:"email" binding:"required"`
+	Password string `form:"password" binding:"required"`
+}
+
 func register(c *gin.Context) {
-	c.String(http.StatusNotFound, "url not found")
+	registerForm := &registerForm{}
+	err := c.ShouldBind(registerForm)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	err = user.RegisterUser(registerForm.Name, registerForm.Email, registerForm.Password)
+	if err != nil {
+		c.JSON(http.StatusConflict, gin.H{"error": err.Error()})
+		return
+	}
+	c.String(http.StatusCreated, "")
 }
 
 type loginForm struct {
