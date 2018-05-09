@@ -44,3 +44,12 @@ func Login(email, password string) (bool, string) {
 
 	return true, tokenString
 }
+
+func GetUserInfo(userID uint) *model.User {
+	user := &model.User{}
+	user, err := user.GetByID(userID)
+	if err != nil {
+		return nil
+	}
+	return user
+}

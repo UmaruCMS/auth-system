@@ -22,6 +22,14 @@ func NewUser(name, email string) (*User, error) {
 	return user, nil
 }
 
+func (user *User) GetByID(userID uint) (*User, error) {
+	db := config.Database
+	if err := db.Where("id = ?", userID).Find(user).Error; err != nil {
+		return nil, err
+	}
+	return user, nil
+}
+
 func (user *User) GetByEmail(email string) (*User, error) {
 	db := config.Database
 	if err := db.Where("email = ?", email).Find(user).Error; err != nil {
