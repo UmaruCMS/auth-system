@@ -24,5 +24,5 @@
 
 * [x] 用户注册 (HTTP)
 * [x] 用户登录 (HTTP)
-* [x] 获取用户信息 (HTTP / RPC)
-* [ ] Token 校验 (RPC)
+* [x] 获取用户信息 (HTTP / RPC) （RPC 待测试）
+* [x] Token 校验 (RPC) （待测试）
