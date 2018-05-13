@@ -2,7 +2,13 @@
 
 ## Notice
 
+### dep
+
 依赖发生变化时要执行 `dep ensure`
+
+### grpc
+
+`protoc -I rpc/ rpc/base/auth/main.proto --go_out=plugins=grpc:rpc`
 
 ## TODO List
 

@@ -1,8 +1,13 @@
 package main
 
 import (
+	"log"
+	"net"
+
 	"github.com/UmaruCMS/auth-system/config"
-	"github.com/UmaruCMS/auth-system/http/router"
+	pb "github.com/UmaruCMS/auth-system/rpc/base/auth"
+	rpc "github.com/UmaruCMS/auth-system/rpc/service"
+	"google.golang.org/grpc"
 )
 
 func release() {
@@ -19,7 +24,15 @@ func main() {
 	// tokenInfo.Delete()
 	// fmt.Println(user.VerifyTokenString(token))
 
-	r := router.DefaultRouter()
-	router.RegisterHandlers(r)
-	r.Run(":2333")
+	// r := router.DefaultRouter()
+	// router.RegisterHandlers(r)
+	// r.Run(":2333")
+
+	lis, err := net.Listen("tcp", ":2334")
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
+	}
+	grpcServer := grpc.NewServer()
+	pb.RegisterAuthServer(grpcServer, &rpc.AuthServer{})
+	grpcServer.Serve(lis)
 }
