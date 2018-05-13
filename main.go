@@ -1,8 +1,15 @@
 package main
 
 import (
+	"log"
+	"net"
+
 	"github.com/UmaruCMS/auth-system/config"
 	"github.com/UmaruCMS/auth-system/http/router"
+	apb "github.com/UmaruCMS/auth-system/rpc/base/auth"
+	upb "github.com/UmaruCMS/auth-system/rpc/base/user"
+	rpc "github.com/UmaruCMS/auth-system/rpc/service"
+	"google.golang.org/grpc"
 )
 
 func release() {
@@ -23,11 +30,12 @@ func main() {
 	router.RegisterHandlers(r)
 	r.Run(":2333")
 
-	// lis, err := net.Listen("tcp", ":2334")
-	// if err != nil {
-	// 	log.Fatalf("failed to listen: %v", err)
-	// }
-	// grpcServer := grpc.NewServer()
-	// pb.RegisterAuthServer(grpcServer, &rpc.AuthServer{})
-	// grpcServer.Serve(lis)
+	lis, err := net.Listen("tcp", ":2334")
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
+	}
+	grpcServer := grpc.NewServer()
+	apb.RegisterAuthServer(grpcServer, &rpc.AuthServer{})
+	upb.RegisterUserServer(grpcServer, &rpc.UserServer{})
+	grpcServer.Serve(lis)
 }

@@ -8,7 +8,8 @@
 
 ### grpc
 
-`protoc -I rpc/ rpc/base/auth/main.proto --go_out=plugins=grpc:rpc`
+* `protoc -I rpc/ rpc/base/auth/main.proto --go_out=plugins=grpc:rpc`
+* `protoc -I rpc/ rpc/base/user/main.proto --go_out=plugins=grpc:rpc`
 
 ## TODO List
 
@@ -23,5 +24,5 @@
 
 * [x] 用户注册 (HTTP)
 * [x] 用户登录 (HTTP)
-* [ ] 获取用户信息 (HTTP / RPC)
+* [x] 获取用户信息 (HTTP / RPC)
 * [ ] Token 校验 (RPC)
